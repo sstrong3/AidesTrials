@@ -155,15 +155,12 @@ Again, we get the p-value of 1 from the Fisher's exact test, with a confidence i
 ## Genvoyabub Conclusions 
 We examined the results of Genvoyabub on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Genvoyabub on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Genvoyabub had little to no effect on either sex. We concluded that for all individuals, Genvoyabub is ineffective as a preventative drug for Aids.
 
-# Atriplavast
-
-We will subset the data by sex to see if the drug is sex specific.
+# Drug 2: Atriplavast
 
 
 
-# abacavirinol
 
-We will subset the data by sex to see if the drug is sex specific.
+# Drug 3: Abacavirinol
 
 
 
