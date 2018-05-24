@@ -61,7 +61,7 @@ CHIGen <- chisqtestGC(tabGen, graph = TRUE)
 CHIGen
 ```
  
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5735 or about 57.3% of the time. Since this value is very high (well above the 0.05 standard of significance), there is enough evidence to accept the null hypothesis. We conclude that for the general population, Genvoyabub does not have any effect on whether one contracts Aids. 
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5735 or about 57.3% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Genvoyabub does not have any effect on whether one contracts Aids. 
 
 ## Genvoyabub Effects on Females 
 
@@ -102,7 +102,7 @@ CHIGenF <- chisqtestGC(tabGenF, graph = TRUE)
 CHIGenF
 ```
 
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is enough evidence to accept the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids.  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids.  
 
 ## Genvoyabub Effects on Males 
 
@@ -142,7 +142,7 @@ CHIGenM <- chisqtestGC(tabGenM, graph = TRUE)
 CHIGenM
 ```
 
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 1 or nearly 100% of the time. A 100% probability means there is more than enough evidence to accept the null hypothesis. However, since it may seem unlikely that any event would occur 100% of the time, we will use the Fisher's exact test as a second approach.
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 1 or nearly 100% of the time. A 100% probability means there is no evidence to reject the null hypothesis. However, since it may seem unlikely that any event would occur 100% of the time, we will use the Fisher's exact test as a second approach.
 
 $H_0$: The odds ratio between contracting Aids and taking Genvoyabub contains the number 1.  
 $H_a$: The odds ratio between contracting Aids and taking Genvoyabub does not contain the number 1.  
@@ -150,7 +150,7 @@ $H_a$: The odds ratio between contracting Aids and taking Genvoyabub does not co
 fisher.test(tabGenM)
 ```
 
-Again, we get the p-value of 1 from the Fisher's exact test, with a confidence interval of 0.6347, 1.507. Therefore, we must accept the null hypothesis.
+Again, we get the p-value of 1 from the Fisher's exact test, with a confidence interval of 0.6347, 1.507. Therefore, we fail to reject the null hypothesis.
 
 ## Genvoyabub Conclusions 
 We examined the results of Genvoyabub on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Genvoyabub on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Genvoyabub had little to no effect on either sex. We concluded that for all individuals, Genvoyabub is ineffective as a preventative drug for Aids.
