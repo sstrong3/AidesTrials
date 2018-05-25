@@ -19,23 +19,125 @@ Atriplavast<-read.csv(file="Atriplavast.csv",header=TRUE)
 Three new preventative aides drugs were tested in clinical trials in 2015. The trial designs were modeled after the famous RV_144 Aides Trials in Tailand in 2009.  Analyze and report on the apparent effectiveness of the three different drugs. Does sex of the participant seem to be a factor for any of the drugs?
 
 
-# Genvoyabub
-
-We will subset the data by sex to see if the drug is sex specific.
-
-
-# Atriplavast
-
-We will subset the data by sex to see if the drug is sex specific.
+# Drug 1: Genvoyabub
 
 
 
-# abacavirinol
-
-We will subset the data by sex to see if the drug is sex specific.
+# Drug 2: Atriplavast
 
 
 
+# Drug 3: Abacavirinol
 
+Now, we will subset the data to examine if those who were infected with Aids received Abacavirinol or the plaecbo.  
+```{r}
+Aba <- abacavirinol
+tabAba <- xtabs(~infected+group, data=Aba)
+tabAba
+```
+  
+From the above table, we see that the number of those who contracted Aids after taking Abacavirinol is very similar to those who contracted Aids after taking the placebo; 118 people who received the drug contracted Aids, whereas 121 people who received the placebo contracted Aids. In general, there were also more individuals who did not contract Aids than those who did, regardless of what drug group they were in.  
 
+### Graphical Results
+The following barchart visually represents the percentages of Abacavirinol and placebo recipients who did or did not contract Aids. 
+```{r}
+barchartGC(tabAba, type="percent", main="Abacavirinol (All Individuals)")
+```
 
+If the two variables are independent, meaning there is no relationship between getting the vaccine and contracting the virus, then we would expect to see both graphs of equal size (50% on each side). Since our charts do appear to be very similar, it seems likely that taking Abacavirinol is independent of getting Aids.  
+### Numerical Results
+```{r}
+colPerc(tabAba)
+rowPerc(tabAba)
+```
+
+From these percents, we see that out of all the individuals, the majority remained negative for the disease independent of whether they received the drug or not. Of those who contracted Aids, nearly half took Abacavirinol (49%) and half took the placebo (51%). These numbers seem to indicate that in the general population, taking Abacavirinol has no effect on whether or not a person gets Aids.  
+
+### Inferential Results
+Next, we will test the independence of the Abacavirinol drug and placebo group using the chi-square test. We will state the null and alternative hypotheses for this test.  
+   
+$H_0$: Taking the Abacavirinol drug is independent of contracting Aids.   
+$H_a$: Contracting Aids is dependent of taking Abacavirinol.  
+```{r}
+CHIAba <- chisqtestGC(tabAba, graph = TRUE)
+CHIAba
+```
+
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.8942 or about 89.4% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Abacavirinol does not have any effect on whether one contracts Aids.  
+
+## Abacavirinol Effects on Females  
+Even though we have concluded that Abacavirinol does not appear to influence whether a person contracts Aids, it is always possible that the drug is sex specific. So, we must subset our data to see if the drug worked on the females in the study.  
+```{r}
+tabAbaF <- xtabs(~infected+group, sex=="F", data=Aba)
+tabAbaF
+```
+
+In the female subset, it appears that the amount of Aids infections are less for those who received the drug (40 females) than for those who received the placebo (63 females).  
+
+### Graphical Results (Females)
+Next, we make a barchart of the percentage of females who contracted Aids versus those who did not, according to whether they received the drug or the placebo.  
+```{r}
+barchartGC(tabAbaF, type="percent", main="Abacavirinol (Females)")
+```
+
+Again, we see that out of the females who contracted Aids, less of them took Abacavirinol. This appears to indicate that taking the drug might have an effect on the likelihood of females contracting Aids.  
+
+### Numerical Results (Females)
+```{r}
+colPerc(tabAbaF)
+rowPerc(tabAbaF)
+```
+
+The above percentages support our graphical evidence that less women contracted Aids after receiving the drug (38.8%) than those who received the placebo (61%). These results appear to indicate that contracting Aids is dependent on taking Abacavirinol. 
+
+### Inferential Results (Females)
+Next, we will test the independence of the Abacavirinol drug and placebo group within the female population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+  
+$H_0$: Taking the Abacavirinol drug is independent of contracting Aids among females.  
+$H_a$: Contracting Aids in the female population is dependent of taking Abacavirinol.  
+```{r}
+CHIAbaF <- chisqtestGC(tabAbaF, graph = TRUE)
+CHIAbaF
+```
+  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0264 or about 2.64% of the time. Since this value is very low (below the 0.05 standard of significance), we reject the null hypothesis. We conclude that for the female population, Abacavirinol does have an impact on whether one contracts Aids.
+
+## Abacavirinol Effects on Males
+Now, we must subset our data to see if the drug worked on the males in the study.  
+```{r}
+tabAbaM <- xtabs(~infected+group, sex=="M", data=Aba)
+tabAbaM
+```
+  
+In the male subset, it appears that out of those who contracted Aids, more took Abacavirinol (78 males) than took the placebo (58 males).
+
+### Graphical Results (Males)
+Next, we make a barchart of the percentage of males who contracted Aids versus those who did not, according to whether they received the drug or the placebo.  
+```{r}
+barchartGC(tabAbaM, type="percent", main="Abacavirinol (Males)")
+```
+
+Again, we see that out of the males who contracted Aids, more received the drug This does not appear to indicate that Abacavirinol was effective at **preventing** males from contracting Aids.  
+
+### Numerical Results (Males)
+```{r}
+colPerc(tabAbaM)
+rowPerc(tabAbaM)
+```
+
+The above percentages support our graphical evidence that more men who contracted Aids had taken the drug. 57% of aids positive men took the drug; whereas only 42% took the placebo.  
+
+### Inferential Results (Males)
+Next, we will test the independence of the Abacavirinol drug and placebo group within the male population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+  
+$H_0$: Taking the Abacavirinol drug is independent of contracting Aids among males.  
+$H_a$: Contracting Aids in the male population is dependent of taking Abacavirinol. 
+```{r}
+CHIAbaM <- chisqtestGC(tabAbaM, graph = TRUE)
+CHIAbaM
+```
+
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0926 or about 9.26% of the time. Since this p-value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We conclude that for the male population, Abacavirinol does not have any effect on whether one contracts Aids.  
+  
+## Abacavirinol Conclusions
+We examined the results of Abacavirinol on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Abacavirinol on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Abacavirinol was effective at preventing Aids in females, but not in males. The only people who migt benefit from taking Abacavirinol are women.
