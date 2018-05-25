@@ -53,7 +53,7 @@ From these percents, we see that out of all the individuals, the majority remain
 ### Inferential Results
 Next, we will test the independence of the Genvoyabub drug and placebo group using the chi-square test. We will state the null and alternative hypotheses for this test.  
 
-$H_0$: The Genvoyabub drug and placebo are independent of contracting Aids.
+$H_0$: The Genvoyabub drug and placebo are independent of contracting Aids.  
 $H_a$: Taking Genvoyabub is related to contracting Aids. 
 
 ```{r}
@@ -94,14 +94,14 @@ The above percentages support our graphical evidence that of the females who con
 ### Inferential Results (Females)
 Next, we will test the independence of the Genvoyabub drug and placebo group within the female population using the chi-square test. We will state the null and alternative hypotheses for this test.  
 
-$H_0$: The Genvoyabub drug is independent of contracting Aids among females.  
+$H_0$: The Genvoyabub drug is independent of contracting Aids among females.    
 $H_a$: Taking Genvoyabub is related to contracting Aids among females.
 
 ```{r}
 CHIGenF <- chisqtestGC(tabGenF, graph = TRUE)
 CHIGenF
 ```
-
+  
 Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids.  
 
 ## Genvoyabub Effects on Males 
@@ -112,15 +112,15 @@ Now, we must subset our data to see if the drug worked on the males in the study
 tabGenM <- xtabs(~infected+group, sex=="M", data=Gen)
 tabGenM
 ```
-
+  
 In the male subset, it again appears that the amount of Aids infections are even more evenly split between those who received the drug (47 males) and the placebo (48 males).
 
 ### Graphical Results (Males)
-Next, we make a barchart of the percentage of males who contracted Aids versus those who did not, according to whether they received the drug or the placebo.
+Next, we make a barchart of the percentage of males who contracted Aids versus those who did not, according to whether they received the drug or the placebo.  
 ```{r}
 barchartGC(tabGenM, type="percent", main="Genvoyabub (Males)")
 ```
-
+  
 Again, we see that out of the males who contracted Aids, only a handful more received the placebo. This does not appear to indicate that Genvoyabub had any effect on the likelihood of males contracting Aids.
 
 ### Numerical Results (Males)
@@ -134,7 +134,7 @@ The above percentages support our graphical evidence that of the males who contr
 ### Inferential Results (Males)
 Next, we will test the independence of the Genvoyabub drug and placebo group within the male population using the chi-square test. We will state the null and alternative hypotheses for this test.  
 
-$H_0$: The Genvoyabub drug is independent of contracting Aids among males.
+$H_0$: The Genvoyabub drug is independent of contracting Aids among males.  
 $H_a$: Taking Genvoyabub is related to contracting Aids among males.
 
 ```{r}
