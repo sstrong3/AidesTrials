@@ -20,8 +20,140 @@ Three new preventative aides drugs were tested in clinical trials in 2015. The t
 
 
 # Drug 1: Genvoyabub
+First, we need to subset the data to examine if those who were infected with Aids received the drug or the plaecbo.
+
+```{r}
+Gen <- Genvoyabub
+tabGen <- xtabs(~infected+group, data=Gen)
+tabGen
+```
+
+From the above table, we see that the number of those who contracted Aids appears to be very similar to the number that did not contract Aids;  101 people who received the drug contracted Aids, whereas 110 people who received the placebo contracted Aids. In general, there were also more individuals who did not contract Aids than those who did, regardless of what drug group they were in.
+
+### Graphical Results
+The following barchart visually represents the percentages of vaccine and placebo recipients who did or did not contract Aids.
+```{r}
+barchartGC(tabGen, type="percent", main="Genvoyabub (All Individuals)")
+```
+
+If the two variables are independent, meaning there is no relationship between getting the vaccine and contracting the virus, then we would expect to see both graphs of equal size (50% on each side). Since our charts do appear to be very similar, it seems likely that taking Genvoyabub is independent of getting Aids. 
+
+In order to further explore the idea of independence bewteen the variables, we can break down the data numerically. The following information shows the percentages of both vaccine recipients and placebo recipients that did or did not contract the virus.
 
 
+### Numerical Results
+```{r}
+colPerc(tabGen)
+rowPerc(tabGen)
+```
+
+From these percents, we see that out of all the individuals, the majority remained negative for the disease independent of whether they received the drug or not. Of those who contracted Aids, nearly half received the drug (48%) and half received the placebo (52%). These numbers seem to indicate that in the general population, taking the drug has no effect on whether or not a person gets Aids.  
+
+### Inferential Results
+Next, we will test the independence of the Genvoyabub drug and placebo group using the chi-square test. We will state the null and alternative hypotheses for this test.  
+
+$H_0$: The Genvoyabub drug and placebo are independent of contracting Aids.  
+$H_a$: Taking Genvoyabub is related to contracting Aids. 
+
+```{r}
+CHIGen <- chisqtestGC(tabGen, graph = TRUE)
+CHIGen
+```
+ 
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5735 or about 57.3% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Genvoyabub does not have any effect on whether one contracts Aids. 
+
+## Genvoyabub Effects on Females 
+
+Even though we have concluded that Genvoyabub does not appear to influence whether a person contracts Aids, it is always possible that the drug is sex specific. So, we must subset our data to see if the drug worked on the females in the study.
+
+```{r}
+tabGenF <- xtabs(~infected+group, sex=="F", data=Gen)
+tabGenF
+```
+
+In the female subset, it again appears that the amount of Aids infections are nearly evenly split between those who received the drug (54 females) and the placebo (62 females).
+
+### Graphical Results (Females)
+Next, we make a barchart of the percentage of females who contracted Aids versus those who did not, according to whether they received the drug or the placebo.
+```{r}
+barchartGC(tabGenF, type="percent", main="Genvoyabub (Females)")
+```
+
+Again, we see that out of the females who contracted Aids, only a handful more received the placebo. This does not appear to indicate that Genvoyabub had any effect on the likelihood of females contracting Aids.
+
+
+### Numerical Results (Females)
+```{r}
+colPerc(tabGenF)
+rowPerc(tabGenF)
+```
+
+The above percentages support our graphical evidence that of the females who contracted the virus, half received the drug and half received the placebo. These results do not indicate that Genvoyabub was effective in the female population.
+
+### Inferential Results (Females)
+Next, we will test the independence of the Genvoyabub drug and placebo group within the female population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+
+$H_0$: The Genvoyabub drug is independent of contracting Aids among females.    
+$H_a$: Taking Genvoyabub is related to contracting Aids among females.
+
+```{r}
+CHIGenF <- chisqtestGC(tabGenF, graph = TRUE)
+CHIGenF
+```
+  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids.  
+
+## Genvoyabub Effects on Males 
+
+Now, we must subset our data to see if the drug worked on the males in the study.  
+
+```{r}
+tabGenM <- xtabs(~infected+group, sex=="M", data=Gen)
+tabGenM
+```
+  
+In the male subset, it again appears that the amount of Aids infections are even more evenly split between those who received the drug (47 males) and the placebo (48 males).
+
+### Graphical Results (Males)
+Next, we make a barchart of the percentage of males who contracted Aids versus those who did not, according to whether they received the drug or the placebo.  
+```{r}
+barchartGC(tabGenM, type="percent", main="Genvoyabub (Males)")
+```
+  
+Again, we see that out of the males who contracted Aids, only a handful more received the placebo. This does not appear to indicate that Genvoyabub had any effect on the likelihood of males contracting Aids.
+
+### Numerical Results (Males)
+```{r}
+colPerc(tabGenM)
+rowPerc(tabGenM)
+```
+
+The above percentages support our graphical evidence that of the males who contracted the virus, half received the drug (49.5%) and half received the placebo (50.5%). These results do not indicate that Genvoyabub was effective in the male population.
+
+### Inferential Results (Males)
+Next, we will test the independence of the Genvoyabub drug and placebo group within the male population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+
+$H_0$: The Genvoyabub drug is independent of contracting Aids among males.  
+$H_a$: Taking Genvoyabub is related to contracting Aids among males.
+
+```{r}
+CHIGenM <- chisqtestGC(tabGenM, graph = TRUE)
+CHIGenM
+```
+
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 1 or nearly 100% of the time. A 100% probability means there is no evidence to reject the null hypothesis. However, since it may seem unlikely that any event would occur 100% of the time, we will use the Fisher's exact test as a second approach.
+
+$H_0$: The odds ratio between contracting Aids and taking Genvoyabub contains the number 1.  
+$H_a$: The odds ratio between contracting Aids and taking Genvoyabub does not contain the number 1.  
+```{r}
+fisher.test(tabGenM)
+```
+
+Again, we get the p-value of 1 from the Fisher's exact test, with a confidence interval of 0.6347, 1.507. Therefore, we fail to reject the null hypothesis.
+
+
+## Genvoyabub Conclusions 
+We examined the results of Genvoyabub on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Genvoyabub on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Genvoyabub had little to no effect on either sex. We concluded that for all individuals, Genvoyabub is ineffective as a preventative drug for Aids.
 
 # Drug 2: Atriplavast
 
@@ -29,9 +161,6 @@ Three new preventative aides drugs were tested in clinical trials in 2015. The t
 
 
 # Drug 3: Abacavirinol
-
-
-
 
 
 
