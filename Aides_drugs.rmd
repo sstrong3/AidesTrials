@@ -1,6 +1,6 @@
 ---
-title: "Aides Tests"
-author: "Dr K"
+title: "Aids Tests"
+author: "Skye Strong"
 date: "May 24, 2017"
 output: html_document
 ---
@@ -14,10 +14,16 @@ abacavirinol<-read.csv(file="abacavirinol.csv",header=TRUE)
 Atriplavast<-read.csv(file="Atriplavast.csv",header=TRUE)
 ```
 
-#Instructions
+# Introduction
+Three new preventative Aids drugs were tested in clinical trials in 2015. The trial designs were modeled after the famous RV_144 Aides Trials in Thailand in 2009. In this report, we will be anazlying the three new drugs - Genvoyabub, Atriplavast, and Abacavirinol - in order to determine their effectiveness at preventing Aids.  
+  
+Our research questions are: Does sex of the participant seem to be a factor for any of the drugs?  Which if any drug would you recommend or tell to avoid for a) a 32 year old female and b) a 27 year old male?
 
-Three new preventative aides drugs were tested in clinical trials in 2015. The trial designs were modeled after the famous RV_144 Aides Trials in Tailand in 2009.  Analyze and report on the apparent effectiveness of the three different drugs. Does sex of the participant seem to be a factor for any of the drugs?
+# Methods
 
+This report will be organized into three analytic sections: Drug 1: Genvoyabub, Drug 2: Atriplavast, and Drug 3: Abacavirinol. For each drug, we will create a table using the `xtabs` function to pull data from a .csv file that has recorded information from all the participants studied. The Genvoyabub trial includes 4924 individuals, the Abacavirinol trial includes 4400 individuals, and the Atriplavast trial includes 4532 individuals. Each of the data files are broken down into three categories: group, sex and infected. Group includes if the individual received the drug or the placebo; Sex describes the gender of the indivudual, either male (M) or female (F); and infected describes if one contracted Aids (aids) or remained negative (none).  
+
+Using subsets of this data, we will determine each drug's effectiveness among all participants in the study, just the females in the study, and just the males in the study. For each population, we will compare the percentages of individuals who contracted Aids after taking the drug to the percentages of individuals who contracted Aids after taking the placebo. The data will be examined graphically using  `barchartGC`, numerically using `colPerc` and `rowPerc`, and finally, inferentially using a Chi-square test.  
 
 # Drug 1: Genvoyabub
 First, we need to subset the data to examine if those who were infected with Aids received the drug or the plaecbo.
@@ -62,6 +68,8 @@ CHIGen
  
 Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5735 or about 57.3% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Genvoyabub does not have any effect on whether one contracts Aids. 
 
+****     
+
 ## Genvoyabub Effects on Females 
 
 Even though we have concluded that Genvoyabub does not appear to influence whether a person contracts Aids, it is always possible that the drug is sex specific. So, we must subset our data to see if the drug worked on the females in the study.
@@ -101,7 +109,9 @@ CHIGenF <- chisqtestGC(tabGenF, graph = TRUE)
 CHIGenF
 ```
   
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids.  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.5055 or about 50% of the time. Since this p-value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the female population, Genvoyabub does not have any effect on whether one contracts Aids. 
+
+****   
 
 ## Genvoyabub Effects on Males 
 
@@ -196,7 +206,9 @@ CHIAtr <- chisqtestGC(tabAtr, graph = TRUE)
 CHIAtr
 ```
   
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0699 or about 7% of the time. Since this value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We can conclude that for the general population, Atriplavast does not have any effect on whether one contracts Aids.    
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0699 or about 7% of the time. Since this value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We can conclude that for the general population, Atriplavast does not have any effect on whether one contracts Aids.
+
+****  
 
 ## Atriplavast Effects on Females
 
@@ -224,7 +236,7 @@ colPerc(tabAtrF)
 rowPerc(tabAtrF)
 ```
   
-The above percentages support our graphical evidence that of the females who contracted the virus, 65% received the drug and about 35% received the placebo. These results indicate that Atriplavast was not at all effective at **preventing** Aids in the female population.   
+The above percentages support our graphical evidence that of the females who contracted the virus, 65% received the drug and about 35% received the placebo. These results indicate that Atriplavast was not at all effective at *preventing* Aids in the female population.   
 
 ### Inferential Results (Females)
 Next, we will test the independence of the Atriplavast drug and placebo group within the female population using the chi-square test. We will state the null and alternative hypotheses for this test.  
@@ -236,8 +248,10 @@ CHIAtrF <- chisqtestGC(tabAtrF, graph = TRUE)
 CHIAtrF
 ```
   
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0066 or about .66% of the time. Since this value is very low, below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the female population taking Atriplavast does have an effect on contracting Aids; however, it has the opposite effect we would like to see from a preventative drug. Taking Atriplavast appears to increase the likelihood that a female will contract Aids.  
-  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0066 or about .66% of the time. Since this value is very low, below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the female population taking Atriplavast does have an effect on contracting Aids; however, it has the opposite effect we would like to see from a preventative drug. Taking Atriplavast appears to increase the likelihood that a female will contract Aids.
+
+**** 
+
 ## Atriplavast Effects on Males
 Now, we must subset our data to see if the drug worked on the males in the study.  
 ```{r}
@@ -313,7 +327,9 @@ CHIAba <- chisqtestGC(tabAba, graph = TRUE)
 CHIAba
 ```
 
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.8942 or about 89.4% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Abacavirinol does not have any effect on whether one contracts Aids.  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.8942 or about 89.4% of the time. Since this value is very high (well above the 0.05 standard of significance), there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Abacavirinol does not have any effect on whether one contracts Aids.
+
+****    
 
 ## Abacavirinol Effects on Females  
 Even though we have concluded that Abacavirinol does not appear to influence whether a person contracts Aids, it is always possible that the drug is sex specific. So, we must subset our data to see if the drug worked on the females in the study.  
@@ -351,6 +367,8 @@ CHIAbaF
 ```
   
 Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0264 or about 2.64% of the time. Since this value is very low (below the 0.05 standard of significance), we reject the null hypothesis. We conclude that for the female population, Abacavirinol does have an impact on whether one contracts Aids.
+
+****   
 
 ## Abacavirinol Effects on Males
 Now, we must subset our data to see if the drug worked on the males in the study.  
@@ -391,3 +409,26 @@ Under the assumption that the null hypothesis is true, the probability that we w
   
 ## Abacavirinol Conclusions
 We examined the results of Abacavirinol on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Abacavirinol on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Abacavirinol was effective at preventing Aids in females, but not in males. The only people who migt benefit from taking Abacavirinol are women.
+  
+# Discussion and Conclusion
+After viewing the results graphically, numerically, and running chi-square tests on the data, we can conclude the following:  
+  
+  *  Genvoyabub was not effective at preventing Aids among any individuals, regardless of sex.   
+    
+  *  Atriplavast was effective at preventing Aids among males only. 
+    +  Women who took the drug seemed to have a higher incidence of Aids.  
+    
+      
+  *  Abacavirinol was effective at preventing Aids among females only.  
+    +  Men who took the drug appeared to have a higher incidence of Aids, though this finding was not necessarily supported by our Chi-square test.   
+
+
+These conclusions allow us to answer our initial research questions:  
+  
+1. **Does sex of the participant seem to be a factor for any of the drugs?** Yes, sex of the participant is a factor for both Atriplavast and Abacavirinol. Atriplavast worked better on men and Abacavirinol worked better on women.
+  
+2.  **Which if any drug would you recommend or tell to avoid for a 32 year old female? **A 32 year old female should take Abacavirinol as it was the only effective drug for women. She should avoid avoid both Atriplavast (since it seemed to make women more likely to contract Aids) and Genvoyabub (since it was not effective for anyone). 
+  
+3. **Which if any drug would you recommend or tell to avoid for a 27 year old male?** A 27 year old male should take Atriplivast as it was the only effective drug for men. He should avoid both Abacavirinol (since it was not effective for men and more men that took the drug got Aids) and Genvoyabub (since it was not effective for anyone).
+   
+As a final note, our findings that Atriplavast and Abacavirinol seem to have the opposite of preventative effects on women and men respectively reveal a need for further medical research on the sex-specific nature of these drugs. Why would a drug prevent Aids in one sex, but make the other sex more susceptible to contracting the disease? Determining the drug characteristics that work on each individual sex might allow pharmaceutical companies to create one drug that works equally well on both sexes.
