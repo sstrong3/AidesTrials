@@ -151,13 +151,131 @@ fisher.test(tabGenM)
 
 Again, we get the p-value of 1 from the Fisher's exact test, with a confidence interval of 0.6347, 1.507. Therefore, we fail to reject the null hypothesis.
 
-
 ## Genvoyabub Conclusions 
 We examined the results of Genvoyabub on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Genvoyabub on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Genvoyabub had little to no effect on either sex. We concluded that for all individuals, Genvoyabub is ineffective as a preventative drug for Aids.
 
 # Drug 2: Atriplavast
 
+We will subset the data to examine if those who were infected with Aids received the Atriplavast drug or the plaecbo.
+```{r}
+Atr <- Atriplavast
+tabAtr <- xtabs(~infected+group, data=Atr)
+tabAtr
+```
 
+From the above table, we see that the number of those who contracted Aids appears to be close to the number that did not contract Aids; 103 people who received the drug contracted Aids, whereas 131 people who received the placebo contracted Aids. In general, there were more individuals who did not become infected with Aids whether they were given Atriplavast or the placebo.
+
+### Graphical Results
+The following barchart visually represents the percentages of Atriplavast and placebo recipients who did or did not contract Aids.  
+```{r}
+barchartGC(tabAtr, type="percent", main="Atriplavast (All Individuals)")
+```
+  
+If the two variables are independent, meaning there is no relationship between taking the drug and contracting the virus, then we would expect to see both graphs of equal size (50% on each side). Since the bar of those who contracted Aids is lower for those who took Atriplavast, it seems possible that taking Atriplavast has some impact on getting Aids, though only slightly.  
+  
+In order to further explore the idea of independence bewteen the variables, we can break down the data numerically. The following information shows the percentages of both drug recipients and placebo recipients that did or did not contract the virus.  
+
+### Numerical Results
+
+```{r}
+colPerc(tabAtr)
+rowPerc(tabAtr)
+```
+  
+From these percents, we see that out of all the individuals, the majority remained negative for the disease independent of whether they received Atriplavast or not. Of those who contracted Aids, 44% received the drug and about 56% received the placebo. This 12% difference indicates that in the general population, taking the drug might have an effect on whether or not a person gets Aids, but this requires further testing.  
+
+### Inferential Results
+
+Next, we will test the independence of the Atriplavast drug and placebo group using the chi-square test. We will state the null and alternative hypotheses for this test.  
+  
+$H_0$: The Atriplavast drug and placebo are independent of contracting Aids.  
+$H_a$: Contracting aids is dependent on having taken Atriplavast.  
+
+```{r}
+CHIAtr <- chisqtestGC(tabAtr, graph = TRUE)
+CHIAtr
+```
+  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0699 or about 7% of the time. Since this value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We can conclude that for the general population, Atriplavast does not have any effect on whether one contracts Aids.    
+
+## Atriplavast Effects on Females
+
+We have concluded that Atriplavast does not appear to influence whether a person contracts Aids, but it is always possible that the drug is sex specific. So, we must subset our data to see if the drug worked on the females in the study.  
+```{r}
+tabAtrF <- xtabs(~infected+group, sex=="F", data=Atr)
+tabAtrF
+```
+  
+In the female subset, more of those who took the drug (53 females) ended up contracting Aids than those who took the placebo (28 females). From this initial examination, it seems that Atriplavast is not at all effective in the female population.  
+
+### Graphical Results (Females)
+Next, we make a barchart of the percentage of females who contracted Aids versus those who did not, according to whether they received Atriplavast or the placebo.  
+```{r}
+barchartGC(tabAtrF, type="percent", main="Atriplavast (Females)")
+```
+  
+This barchart confirms our initial findings that more females who took the drug contracted Aids than females who took the placebo.    
+  
+To confirm our findings, we will examine the data numerically.  
+
+### Numerical Results (Females)
+```{r}
+colPerc(tabAtrF)
+rowPerc(tabAtrF)
+```
+  
+The above percentages support our graphical evidence that of the females who contracted the virus, 65% received the drug and about 35% received the placebo. These results indicate that Atriplavast was not at all effective at **preventing** Aids in the female population.   
+
+### Inferential Results (Females)
+Next, we will test the independence of the Atriplavast drug and placebo group within the female population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+  
+$H_0$: The Atriplavast drug and placebo are independent of contracting Aids among females.  
+$H_a$: Contracting aids in the female population is dependent on having taken Atriplavast.  
+```{r}
+CHIAtrF <- chisqtestGC(tabAtrF, graph = TRUE)
+CHIAtrF
+```
+  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0066 or about .66% of the time. Since this value is very low, below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the female population taking Atriplavast does have an effect on contracting Aids; however, it has the opposite effect we would like to see from a preventative drug. Taking Atriplavast appears to increase the likelihood that a female will contract Aids.  
+  
+## Atriplavast Effects on Males
+Now, we must subset our data to see if the drug worked on the males in the study.  
+```{r}
+tabAtrM <- xtabs(~infected+group, sex=="M", data=Atr)
+tabAtrM
+```
+  
+In the male subset, it appears that less men who took the drug (50 males) contracted Aids than those who took the placebo (103 males).  
+
+### Graphical Results (Males)
+```{r}
+barchartGC(tabAtrM, type="percent", main="Atriplavast (Males)")
+```
+  
+Our barchart appears to match our initial findings that men who took Atriplavast did not contract Aids as much as men who were given only the placebo.  
+
+### Numerical Results (Males)
+```{r}
+colPerc(tabAtrM)
+rowPerc(tabAtrM)
+```
+  
+The above percentages support our graphical evidence that of the males who contracted the virus, 32% took the drug and 67% took the placebo. These results seem to indicate that Atriplavast was effective in the male population.  
+
+### Inferential Results (Males)
+Next, we will test the independence of the Atriplavast drug and placebo group within the male population using the chi-square test. We will state the null and alternative hypotheses for this test.  
+  
+$H_0$: The Atriplavast drug and placebo are independent of contracting Aids among males.   
+$H_a$: Contracting aids in the male population is dependent on having taken Atriplavast.   
+```{r}
+CHIAtrM <- chisqtestGC(tabAtrM, graph = TRUE)
+CHIAtrM
+```
+  
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0% of the time. Since this value is obviously below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the male population taking Atriplavast reduces the likelihood of contracting Aids.  
+
+## Atriplavast Conclusions  
+We examined the results of Atriplavast on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Atriplavast on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Atriplavast was effective at preventing Aids in males, but not at all effective among females. The only people who migt benefit from taking Atriplavast are men.
 
 
 # Drug 3: Abacavirinol
