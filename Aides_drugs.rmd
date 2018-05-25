@@ -51,7 +51,7 @@ colPerc(tabAtr)
 rowPerc(tabAtr)
 ```
   
-From these percents, we see that out of all the individuals, the majority remained negative for the disease independent of whether they received Atriplavast or not. Of those who contracted Aids, 44% received the drug and about 56% received the placebo. This 12% difference indicates that in the general population, taking the drug might have an effect on whether or not a person gets Aids.  
+From these percents, we see that out of all the individuals, the majority remained negative for the disease independent of whether they received Atriplavast or not. Of those who contracted Aids, 44% received the drug and about 56% received the placebo. This 12% difference indicates that in the general population, taking the drug might have an effect on whether or not a person gets Aids, but this requires further testing.  
 
 ### Inferential Results
 
@@ -65,7 +65,7 @@ CHIAtr <- chisqtestGC(tabAtr, graph = TRUE)
 CHIAtr
 ```
   
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0699 or about 7% of the time. Since this value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We conclude that for the general population, Atriplavast does not have any effect on whether one contracts Aids.    
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0.0699 or about 7% of the time. Since this value is above the 0.05 standard of significance, there is insufficient evidence to reject the null hypothesis. We can conclude that for the general population, Atriplavast does not have any effect on whether one contracts Aids.    
 
 ## Atriplavast Effects on Females
 
@@ -141,7 +141,10 @@ CHIAtrM <- chisqtestGC(tabAtrM, graph = TRUE)
 CHIAtrM
 ```
   
-Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0% of the time. Since this value is obviously below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the male population taking Atriplavast reduces the likelihood of contracting Aids.
+Under the assumption that the null hypothesis is true, the probability that we would get the results we just obtained are 0% of the time. Since this value is obviously below the 0.05 standard of significance, we reject the null hypothesis. We conclude that for the male population taking Atriplavast reduces the likelihood of contracting Aids.  
+
+## Atriplavast Conclusions  
+We examined the results of Atriplavast on all of the subjects in the study and found that the drug seemed to have no effect on whether one contracted Aids. Since our first test included both sexes, we examined the effects of Atriplavast on females and males individually in order to determine if perhaps the drug was sex specific. After examining the effects of the drug in each subset, we determined that Atriplavast was effective at preventing Aids in males, but not at all effective among females. The only people who migt benefit from taking Atriplavast are men.
 
 # Drug 3: Abacavirinol
 
